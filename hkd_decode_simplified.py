@@ -2,7 +2,6 @@ import os, sys
 def decode(fn):
     with open(fn, "rb") as f:
         data = f.read()
-    print(len(data))
     i = 0
     while i < len(data):
         if data[i] == 0xAA:
@@ -14,7 +13,7 @@ def decode(fn):
                 i+=6
         i+=1
 
-files = os.listdir(sys.argv[1])
+files = [f for f in os.listdir(sys.argv[1]) if os.path.isfile(os.path.join(sys.argv[1], f))]
 files.sort()
 for file in files:
     decode(f"{sys.argv[1]}/{file}")
